@@ -1,0 +1,739 @@
+openapi: 3.0.3
+info:
+  version: '2.0.0'
+  title: Local Actor API v2
+  description: |
+    Local Actor API for managing certificates, subscriptions, deliveries, and capabilities.
+    This API provides endpoints for actor-based certificate management and message routing.
+  contact:
+    name: API Support
+    email: support@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: http://localhost
+    description: Local development server
+paths:
+  /{actorCommonName}/x509/csr:
+    post:
+      summary: Sign Certificate Signing Request
+      description: |
+        Submits a Certificate Signing Request (CSR) for signing and returns the signed certificate chain.
+        The response includes the client certificate, intermediate certificates, and root certificate.
+      operationId: signCertificateRequest
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CertificateSignRequest'
+            example:
+              csr: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0K..."
+      responses:
+        '200':
+          description: Certificate signed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateSignResponse'
+              example:
+                certificates:
+                  - "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0t..."
+                  - "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0t..."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Certificates
+        
+  /{actorCommonName}/subscriptions:
+    post:
+      summary: Create Subscription
+      description: Creates a new subscription for the specified actor with the given selector
+      operationId: createSubscription
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+            example:
+              selector: "messageType=traffic AND quadTree=1234"
+      responses:
+        '200':
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Subscriptions
+        
+    get:
+      summary: List Subscriptions
+      description: Retrieves all subscriptions for the specified actor
+      operationId: listSubscriptions
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      responses:
+        '200':
+          description: List of subscriptions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Subscriptions
+        
+  /{actorCommonName}/subscriptions/{subscriptionId}:
+    get:
+      summary: Get Subscription
+      description: Retrieves a specific subscription by ID
+      operationId: getSubscription
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/SubscriptionId'
+      responses:
+        '200':
+          description: Subscription retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Subscriptions
+        
+    delete:
+      summary: Delete Subscription
+      description: Deletes a specific subscription
+      operationId: deleteSubscription
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/SubscriptionId'
+      responses:
+        '204':
+          description: Subscription deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Subscriptions
+        
+  /{actorCommonName}/subscriptions/capabilities:
+    get:
+      summary: Get Subscription Capabilities
+      description: Retrieves available capabilities for subscriptions
+      operationId: getSubscriptionCapabilities
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: Capabilities retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Subscriptions
+        
+  /{actorCommonName}/deliveries:
+    post:
+      summary: Create Delivery
+      description: Creates a new delivery for the specified actor
+      operationId: createDelivery
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryRequest'
+            example:
+              selector: "messageType=alert AND priority=high"
+      responses:
+        '200':
+          description: Delivery created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delivery'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Deliveries
+        
+    get:
+      summary: List Deliveries
+      description: Retrieves all deliveries for the specified actor
+      operationId: listDeliveries
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      responses:
+        '200':
+          description: List of deliveries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Delivery'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Deliveries
+        
+  /{actorCommonName}/deliveries/{deliveryId}:
+    get:
+      summary: Get Delivery
+      description: Retrieves a specific delivery by ID
+      operationId: getDelivery
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/DeliveryId'
+      responses:
+        '200':
+          description: Delivery retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delivery'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Deliveries
+        
+    delete:
+      summary: Delete Delivery
+      description: Deletes a specific delivery
+      operationId: deleteDelivery
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/DeliveryId'
+      responses:
+        '204':
+          description: Delivery deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Deliveries
+        
+  /{actorCommonName}/deliveries/capabilities:
+    get:
+      summary: Get Delivery Capabilities
+      description: Retrieves available capabilities for deliveries
+      operationId: getDeliveryCapabilities
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/Selector'
+      responses:
+        '200':
+          description: Capabilities retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Deliveries
+        
+  /{actorCommonName}/capabilities:
+    post:
+      summary: Create Capability
+      description: Creates a new capability for the specified actor
+      operationId: createCapability
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Capability'
+      responses:
+        '200':
+          description: Capability created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingCapability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Capabilities
+        
+    get:
+      summary: List Capabilities
+      description: Retrieves all capabilities for the specified actor
+      operationId: listCapabilities
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+      responses:
+        '200':
+          description: List of capabilities retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingCapability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Capabilities
+        
+  /{actorCommonName}/capabilities/{capabilityId}:
+    get:
+      summary: Get Capability
+      description: Retrieves a specific capability by ID
+      operationId: getCapability
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/CapabilityId'
+      responses:
+        '200':
+          description: Capability retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingCapability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Capabilities
+        
+    delete:
+      summary: Delete Capability
+      description: Deletes a specific capability
+      operationId: deleteCapability
+      parameters:
+        - $ref: '#/components/parameters/ActorCommonName'
+        - $ref: '#/components/parameters/CapabilityId'
+      responses:
+        '204':
+          description: Capability deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      tags:
+        - Capabilities
+
+components:
+  parameters:
+    ActorCommonName:
+      name: actorCommonName
+      in: path
+      description: The common name of the actor
+      required: true
+      schema:
+        type: string
+      example: "pilot.interchange.eu"
+      
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      description: Unique identifier for the subscription
+      required: true
+      schema:
+        type: string
+      example: "subscription-123"
+      
+    DeliveryId:
+      name: deliveryId
+      in: path
+      description: Unique identifier for the delivery
+      required: true
+      schema:
+        type: string
+      example: "delivery-456"
+      
+    CapabilityId:
+      name: capabilityId
+      in: path
+      description: Unique identifier for the capability
+      required: true
+      schema:
+        type: string
+      example: "capability-789"
+      
+    Selector:
+      name: selector
+      in: query
+      description: Query selector for filtering capabilities
+      required: false
+      schema:
+        type: string
+      example: "messageType=traffic AND quadTree=1234"
+
+  schemas:
+    Capability:
+      type: object
+      properties:
+        application:
+          type: object
+          properties:
+            messageType:
+              type: string
+              description: Type of message this capability handles
+              example: "traffic"
+            protocolVersion:
+              type: string
+              description: Version of the protocol
+              example: "1.0"
+            publisherId:
+              type: string
+              description: Unique identifier of the publisher
+              example: "publisher-123"
+            publicationId:
+              type: string
+              description: Unique identifier of the publication
+              example: "pub-456"
+            originatingCountry:
+              type: string
+              description: ISO 3166-1 alpha-2 country code
+              example: "SE"
+            quadTree:
+              type: array
+              description: Quadtree identifiers for geographical areas
+              items:
+                type: string
+              example: ["1234", "5678"]
+        metadata:
+          type: object
+          properties:
+            shardCount:
+              type: integer
+              description: Number of shards for load distribution
+              default: 1
+              example: 4
+            infoURL:
+              type: string
+              description: URL providing additional information
+              example: "https://example.com/info"
+            redirectPolicy:
+              type: string
+              description: Policy for handling redirects
+              enum:
+                - OPTIONAL
+                - MANDATORY
+                - UNAVAILABLE
+              example: "OPTIONAL"
+            maxBandwidth:
+              type: integer
+              description: Maximum bandwidth in bytes per second
+              example: 1000000
+            maxMessageRate:
+              type: integer
+              description: Maximum messages per second
+              example: 100
+            repetitionInterval:
+              type: integer
+              description: Interval between repetitions in seconds
+              example: 60
+              
+    OnboardingCapability:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the capability
+              example: "capability-789"
+        - $ref: '#/components/schemas/Capability'
+        
+    SubscriptionRequest:
+      type: object
+      properties:
+        selector:
+          type: string
+          description: Query selector for subscription filtering
+          example: "messageType=traffic AND quadTree=1234"
+          
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the subscription
+          example: "subscription-123"
+        selector:
+          type: string
+          description: Query selector used for this subscription
+          example: "messageType=traffic AND quadTree=1234"
+        status:
+          type: string
+          description: Current status of the subscription
+          enum:
+            - REQUESTED
+            - CREATED
+            - ILLEGAL
+            - NOT_VALID
+            - NO_OVERLAP
+            - RESUBSCRIBE
+          example: "CREATED"
+        endpoints:
+          type: array
+          description: List of endpoints for this subscription
+          items:
+            $ref: '#/components/schemas/SubscriptionEndpoint'
+        lastUpdatedTimestamp:
+          type: integer
+          description: Unix timestamp of last update
+          example: 1674648600
+          
+    SubscriptionEndpoint:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Hostname or IP address
+          example: "localhost"
+        port:
+          type: integer
+          description: Port number
+          example: 8080
+        source:
+          type: string
+          description: Source identifier
+          example: "source-123"
+        maxBandwidth:
+          type: integer
+          description: Maximum bandwidth in bytes per second
+          example: 1000000
+        maxMessageRate:
+          type: integer
+          description: Maximum messages per second
+          example: 100
+          
+    DeliveryRequest:
+      type: object
+      properties:
+        selector:
+          type: string
+          description: Query selector for delivery filtering
+          example: "messageType=alert AND priority=high"
+          
+    Delivery:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the delivery
+          example: "delivery-456"
+        selector:
+          type: string
+          description: Query selector used for this delivery
+          example: "messageType=alert AND priority=high"
+        status:
+          type: string
+          description: Current status of the delivery
+          enum:
+            - REQUESTED
+            - CREATED
+            - ILLEGAL
+            - NOT_VALID
+            - NO_OVERLAP
+          example: "CREATED"
+        endpoints:
+          type: array
+          description: List of endpoints for this delivery
+          items:
+            $ref: '#/components/schemas/DeliveryEndpoint'
+        lastUpdatedTimestamp:
+          type: integer
+          description: Unix timestamp of last update
+          example: 1674648600
+          
+    DeliveryEndpoint:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Hostname or IP address
+          example: "localhost"
+        port:
+          type: integer
+          description: Port number
+          example: 8080
+        target:
+          type: string
+          description: Target identifier
+          example: "target-456"
+        selector:
+          type: string
+          description: Selector for this endpoint
+          example: "priority=high"
+        maxBandwidth:
+          type: integer
+          description: Maximum bandwidth in bytes per second
+          example: 1000000
+        maxMessageRate:
+          type: integer
+          description: Maximum messages per second
+          example: 100
+          
+    CertificateSignRequest:
+      type: object
+      properties:
+        csr:
+          type: string
+          description: Base64 encoded PEM Certificate Signing Request
+          example: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0K..."
+          
+    CertificateSignResponse:
+      type: object
+      properties:
+        certificates:
+          type: array
+          description: |
+            Array of base64 encoded PEM certificates. The first element contains 
+            the client certificate, followed by intermediate certificates, and 
+            finally the root certificate.
+          items:
+            type: string
+          example:
+            - "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0t..."
+            - "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0t..."
+            
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+          example: "VALIDATION_ERROR"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Invalid selector format"
+        details:
+          type: string
+          description: Additional error details
+          example: "Selector must follow the format 'key=value AND key2=value2'"
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the error occurred
+          example: "2023-01-15T10:30:00Z"
+
+  responses:
+    BadRequest:
+      description: Bad Request - Invalid input parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "VALIDATION_ERROR"
+            message: "Invalid request parameters"
+            timestamp: "2023-01-15T10:30:00Z"
+            
+    NotFound:
+      description: Not Found - Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "NOT_FOUND"
+            message: "Resource not found"
+            timestamp: "2023-01-15T10:30:00Z"
+            
+    InternalServerError:
+      description: Internal Server Error - Unexpected server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "INTERNAL_ERROR"
+            message: "An unexpected error occurred"
+            timestamp: "2023-01-15T10:30:00Z"
+
+tags:
+  - name: Certificates
+    description: Certificate management operations
+  - name: Subscriptions
+    description: Subscription management operations
+  - name: Deliveries
+    description: Delivery management operations  
+  - name: Capabilities
+    description: Capability management operations
