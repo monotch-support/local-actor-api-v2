@@ -1,0 +1,482 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Local Actor API v2
+paths:
+  '/{actorCommonName}/subscriptions':
+    post:
+      tags:
+        - Subscriptions
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+      deprecated: false
+    get:
+      tags:
+        - Subscriptions
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+      deprecated: false
+  '/{actorCommonName}/subscriptions/{subscriptionId}':
+    get:
+      tags:
+        - Subscriptions
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+      deprecated: false
+    delete:
+      tags:
+        - Subscriptions
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: OK
+      deprecated: false
+  '/{actorCommonName}/subscriptions/capabilities':
+    get:
+      tags:
+        - Subscriptions
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: selector
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capability'
+      deprecated: false
+  '/{actorCommonName}/deliveries':
+    post:
+      tags:
+        - Deliveries
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delivery'
+      deprecated: false
+    get:
+      tags:
+        - Deliveries
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Delivery'
+      deprecated: false
+  '/{actorCommonName}/deliveries/{deliveryId}':
+    get:
+      tags:
+        - Deliveries
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: deliveryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delivery'
+      deprecated: false
+    delete:
+      tags:
+        - Deliveries
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: deliveryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: OK
+      deprecated: false
+  '/{actorCommonName}/deliveries/capabilities':
+    get:
+      tags:
+        - Deliveries
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: selector
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capability'
+      deprecated: false
+  '/{actorCommonName}/capabilities':
+    post:
+      tags:
+        - Capabilities
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Capability'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingCapability'
+      deprecated: false
+    get:
+      tags:
+        - Capabilities
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingCapability'
+      deprecated: false
+  '/{actorCommonName}/capabilities/{capabilityId}':
+    get:
+      tags:
+        - Capabilities
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: capabilityId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingCapability'
+      deprecated: false
+    delete:
+      tags:
+        - Capabilities
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: capabilityId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: OK
+      deprecated: false
+  '/{actorCommonName}/x509/csr':
+    post:
+      tags:
+        - Certificates
+      parameters:
+        - name: actorCommonName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: "Base64 encoded PEM file (containing the CSR)"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CertificateSignRequest'
+      responses:
+        '200':
+          description: "OK: returns the signed client certificate and CA certificates. The first element contains the client certificate, following any intermediate certificates and finally the root certificate. The certificates are base64 encoded PEM files (see RFC-7468: https://www.rfc-editor.org/rfc/rfc7468)."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateSignResponse'
+      deprecated: false
+components:
+  schemas:
+    Capability:
+      type: object
+      properties:
+        application:
+          type: object
+          properties:
+            messageType:
+              type: string
+            protocolVersion:
+              type: string
+            publisherId:
+              type: string
+            publicationId:
+              type: string
+            originatingCountry:
+              type: string
+            quadTree:
+              type: array
+              items:
+                type: string
+        metadata:
+          type: object
+          properties:
+            shardCount:
+              type: integer
+              default: 1
+            infoURL:
+              type: string
+            redirectPolicy:
+              type: string
+              enum:
+                - OPTIONAL
+                - MANDATORY
+                - UNAVAILABLE
+            maxBandwidth:
+              type: integer
+            maxMessageRate:
+              type: integer
+            repetitionInterval:
+              type: integer
+      title: Capability
+    OnboardingCapability:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+        - $ref: '#/components/schemas/Capability'
+      title: OnboardingCapability
+    SubscriptionRequest:
+      type: object
+      properties:
+        selector:
+          type: string
+      title: SubscriptionRequest
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        selector:
+          type: string
+        status:
+          type: string
+          enum:
+            - REQUESTED
+            - CREATED
+            - ILLEGAL
+            - NOT_VALID
+            - NO_OVERLAP
+            - RESUBSCRIBE
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEndpoint'
+        lastUpdatedTimestamp:
+          type: integer
+      title: Subscription
+    SubscriptionEndpoint:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: integer
+        source:
+          type: string
+        maxBandwidth:
+          type: integer
+        maxMessageRate:
+          type: integer
+    DeliveryRequest:
+      type: object
+      properties:
+        selector:
+          type: string
+      title: DeliveryRequest
+    Delivery:
+      type: object
+      properties:
+        id:
+          type: string
+        selector:
+          type: string
+        status:
+          type: string
+          enum:
+            - REQUESTED
+            - CREATED
+            - ILLEGAL
+            - NOT_VALID
+            - NO_OVERLAP
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveryEndpoint'
+        lastUpdatedTimestamp:
+          type: integer
+      title: Delivery
+    DeliveryEndpoint:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: integer
+        target:
+          type: string
+        selector:
+          type: string
+        maxBandwidth:
+          type: integer
+        maxMessageRate:
+          type: integer
+    CertificateSignRequest:
+      type: object
+      properties:
+        csr:
+          type: string
+          example: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ3ZUQ0NBYVVDQVFBd2VERWdNQjRHQ1NxR1NJYjNEUUVKQVJZUmJHVmhibVJsY2tCdU0zSmtMbXhwWm1VeApNekF4QmdOVkJBTU1LbkJwYkc5MGFXNTBaWEpqYUdGdVoyVXVaWFV1ZEd4bGVDNXpaUzV1TTNKa0xteHBabVV1CmRHVnpkREVTTUJBR0ExVUVDZ3dKVGpOeVpDQk1hV1psTVFzd0NRWURWUVFHRXdKT1REQ0NBU0l3RFFZSktvWkkKaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFMT0FsZ2hVR1dBY0tCS1ZxYXZXQnZsUHZTaURvdVhNV01oZwp0eGZFQ1pWNDlsYWxINjZLTTRlRExDMCtqWjlBWmpaNGg4TEYyQS9tZENkeE9UK1hlc3N0YjViSjZiRVZxTUkxCkp3RG1ITVZUaHlYWVhialIvU1JkaTUzS0xhcENGcjMrWC8wQi9aZ1F5Y29FNzMySVJMN2NlOVprQ2tuWTRyUEwKVkhrTVFLZVZ6RVEraTlaSGNmNkNmbTVMY1FJU0RrODB3MndTelBXcjF1b3JnTFJuYXN2N1pCenAyWXVjTHlkdAovMHBBa3BKeUJnejRra1Ixck4yOE5IeUM0RXQxdzdzOHFjcVZSMDFsRWRxdUlmUjVjMHJMdzdIZFZzT0EwOHR4ClN3NndlcmpMQndYV3FrT2tuUVdCd2lRZ0FXQmtRVE9pZHZaZ3RQaVZFMkNoSGVDQzVDY0NBd0VBQWFBQU1BMEcKQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUI0YnZOVG8vVjA3dlcrYnlGRFNoV1pOK05wR3hVbzVXV2N1Nzk1L2lLUgpjK2g5OXUvUnFWY1BPNXkvckJoTVovTUp6VEZZMko2Y3YyK0dZYkJqa1VhTm45MjE2RDhOQU1wRFR6bHEyVFR4CnROYWJ5eE5ubXJYVnZjUXhFZzRDdzlJN3ZXR0VvQzlCN1I1OGxiVGRDNG95M0VBc2J1dHJJT21PRGMvRWR1SnoKMnRSZ3pEeG9OVWRrWWREcFhyRkthTEczRXlTSjFsVEpuN3MzZEl6UCtkdElPOXBjVjJtMUZKQlpsanRWbmpUTgptM2h0UTZtN2JkbXBUTCtTdEEwTUtJZGFmWFE5R2xBS0cxdWNHNCs2RkR3RVhIZmJ4U2drQ3JyQzg0dWt5TGR1CjBJUWs1NUlqTjFnUy84TVZWN0cycm9uN01KSHBNeWFKaWhYMWNGRTd1TjhYCi0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo="
+    CertificateSignResponse:
+      type: object
+      properties:
+        certificates:
+          type: array
+          items:
+            type: string
+            example: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU0akNDQXNxZ0F3SUJBZ0lDRWowd0RRWUpLb1pJaHZjTkFRRU5CUUF3UnpFTE1Ba0dBMVVFQmhNQ1UwVXgKRXpBUkJnTlZCQW9NQ2s1dmNtUnBZeUJYWVhreEl6QWhCZ05WQkFNTUdtNTNNeTFwYm5SbGNtTm9ZVzVuWlMxagpZUzUwYkdWNExuTmxNQjRYRFRJeE1URXhPVEV4TURjME5Wb1hEVE15TURJeU5URXhNRGMwTlZvd2VERUxNQWtHCkExVUVCaE1DVGt3eEVqQVFCZ05WQkFvTUNVNHpjbVFnVEdsbVpURXpNREVHQTFVRUF3d3FjR2xzYjNScGJuUmwKY21Ob1lXNW5aUzVsZFM1MGJHVjRMbk5sTG00emNtUXViR2xtWlM1MFpYTjBNU0F3SGdZSktvWklodmNOQVFrQgpGaEZzWldGdVpHVnlRRzR6Y21RdWJHbG1aVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DCmdnRUJBTE9BbGdoVUdXQWNLQktWcWF2V0J2bFB2U2lEb3VYTVdNaGd0eGZFQ1pWNDlsYWxINjZLTTRlRExDMCsKalo5QVpqWjRoOExGMkEvbWRDZHhPVCtYZXNzdGI1Yko2YkVWcU1JMUp3RG1ITVZUaHlYWVhialIvU1JkaTUzSwpMYXBDRnIzK1gvMEIvWmdReWNvRTczMklSTDdjZTlaa0Nrblk0clBMVkhrTVFLZVZ6RVEraTlaSGNmNkNmbTVMCmNRSVNEazgwdzJ3U3pQV3IxdW9yZ0xSbmFzdjdaQnpwMll1Y0x5ZHQvMHBBa3BKeUJnejRra1Ixck4yOE5IeUMKNEV0MXc3czhxY3FWUjAxbEVkcXVJZlI1YzByTHc3SGRWc09BMDh0eFN3NndlcmpMQndYV3FrT2tuUVdCd2lRZwpBV0JrUVRPaWR2Wmd0UGlWRTJDaEhlQ0M1Q2NDQXdFQUFhT0JwakNCb3pBSkJnTlZIUk1FQWpBQU1CRUdDV0NHClNBR0crRUlCQVFRRUF3SUZvREF6QmdsZ2hrZ0JodmhDQVEwRUpoWWtUM0JsYmxOVFRDQkhaVzVsY21GMFpXUWcKUTJ4cFpXNTBJRU5sY25ScFptbGpZWFJsTUI4R0ExVWRJd1FZTUJhQUZFQWtPcjdwL1NPaUI1bTI5RElQMUZOKwpZMlYzTUE0R0ExVWREd0VCL3dRRUF3SUY0REFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQWdZSUt3WUJCUVVICkF3UXdEUVlKS29aSWh2Y05BUUVOQlFBRGdnSUJBQTAvTXRnOGlaR0t0Mzl0eHBnZWhMV2RSZkxnOVdUQWU5THkKMHgvK0k3RStwZW5mRGZnQW5tU0hVRG93eWo3OUlna1YxTGJETnBuMUEyZ01wTjA3QUwvY1pibUJ3RU14ZDc5cApTR3FjaVJsVlhYKzBhZGVXRDBDYWZlU0FBNE02eWlieldiYlAyREIzQ1BFOTNMTC8zYWN0YlNNTEhqOEFaeFRnCm1VN2lxVTRTd1QrR2hWR0czWFNRZWtZTTBXejJZZzluL2VRWUNDOHpQSzhMWFArbXNzWDVLaW5NMkR1a1IvY1IKblQ3K05LNzdZNzhicjlvUkJleGl3aURyb05UZU1DZFByQVVyRG05STlOQzlrbmZkOU8xTk4rSmlQZG9uNGZOdQpoV1VCWGU1WG8yZEhoNUJEVDNteWJ0MERyZ1hiVVVVQUNnUmdlcnFoa2dJQjA5MUIzWC9nYnZGbDl4SlUwUWwxCml5MUxhYUFaQWR4a2l2dmVmdVdtQnI2UW5sakZHbngxZ3JQcUtqNk5lY3N3ZWN2UjNhV0hTQXlOeWFENDB2MFQKRkRzZk9ZdFkya0t0LzNlQ0UvZk5oRWNLT2xuOVk5RkZJOE04YjVjYUwwS21nQjQ2bExQaHZrcUxrdUhTOXdNZwpGV3pUQlZtZXh4R1VCR2hJYVE3QW5FK0pFVUdtN3dVQWkxai9ZbUdrbG5MSFZTVXZ0Z283aDdJMkJnTjlwNSt4CnBrVkZkQ3hCdi8zTGcwdmRIeDQ3K1lRMCtYTGNhUjRyT0wvdDVReUNwNjFuN29OSFlOclFLUE5XdHZtVzZlbWwKVXQvdkZ6WlhrdysyVGN2TlFqeENBZTN4U0RGZHZMaE5ldzVFQjMvd05HZkVJSVZSZFNxblZOSmVqbEhIV0JCdwpVVzd5MkJuSAotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
