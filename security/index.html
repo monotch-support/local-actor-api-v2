@@ -493,7 +493,7 @@
   
   
   <span class="md-ellipsis">
-    AMQP
+    AMQP 1.0
     
   </span>
   
@@ -572,6 +572,9 @@
 
 
 <h1 id="security">Security</h1>
+<p>The API authentication is based on TLS Client Authentication. The API is exposed over HTTPS using TLS v1.3. A client side certificate is required to access the API. The client certificate’s “common name” is used for identification of the client (<code>actorCommonName</code>).</p>
+<p>The AMQP connections are also secured by TLS v1.3 and require a client side certificate for authentication. The same client certificate must be used for both the API and the AMQP connections. Clients must be configured to use SASL-EXTERNAL as authentication mechanism since the client certificate’s common name is used as client identity.</p>
+<p>In short:</p>
 <ul>
 <li>Uses <strong>TLS v1.3</strong> with <strong>Client Certificate Authentication</strong></li>
 <li>The certificate's Common Name (<code>CN</code>) is used as client identity (<code>actorCommonName</code>)</li>
@@ -612,7 +615,7 @@
     </a>
   
   
-    | Document version 0.5.0
+    | Document version 0.6.0
   
 </div>
       
@@ -628,7 +631,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.5.0"}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.6.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
