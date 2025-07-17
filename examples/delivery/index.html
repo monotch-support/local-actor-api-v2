@@ -897,7 +897,7 @@
 <li>Access to a Local Actor API v2 instance</li>
 </ul>
 <h3 id="language-specific-requirements">Language-Specific Requirements</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">.NET</label><label for="__tabbed_1_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ul>
@@ -910,6 +910,12 @@
 <ul>
 <li>.NET 6.0 or later</li>
 <li>AMQPNetLite NuGet package</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Go 1.18 or later</li>
+<li>github.com/Azure/go-amqp package</li>
 </ul>
 </div>
 </div>
@@ -962,7 +968,7 @@
 </tbody>
 </table>
 <h2 id="configuration">Configuration</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">.NET</label><label for="__tabbed_2_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="n">ACTOR_API_HOST</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ACTOR_API_HOST&quot;</span><span class="p">,</span> <span class="s2">&quot;hostname_of_the_actor_api&quot;</span><span class="p">)</span>
@@ -984,6 +990,25 @@
 <span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">MESSAGE_APPLICATION_PROPERTIES_JSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Environment</span><span class="p">.</span><span class="n">GetEnvironmentVariable</span><span class="p">(</span><span class="s">&quot;MESSAGE_APPLICATION_PROPERTIES_JSON&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s">&quot;message_application_properties_json&quot;</span><span class="p">;</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">ACTOR_API_HOST</span><span class="w">                      </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;ACTOR_API_HOST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hostname_of_the_actor_api&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ACTOR_API_PORT</span><span class="w">                      </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;ACTOR_API_PORT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;port_of_the_actor_api&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ACTOR_API_DELIVERY_SELECTOR</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;ACTOR_API_DELIVERY_SELECTOR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;selector_of_the_delivery&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ACTOR_COMMON_NAME</span><span class="w">                   </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;ACTOR_COMMON_NAME&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cn_of_the_actor_client_certificate&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pem_with_x509_certificate_chain_and_private_key&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">CA_CERTIFICATE_PEM</span><span class="w">                  </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;CA_CERTIFICATE_PEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pem_with_x509_certificate&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">MESSAGE_APPLICATION_PROPERTIES_JSON</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="s">&quot;MESSAGE_APPLICATION_PROPERTIES_JSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;message_application_properties_json&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">getEnv</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Getenv</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">defaultValue</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <div class="admonition note">
@@ -991,7 +1016,7 @@
 <p>Configuration by environment variables</p>
 </div>
 <h2 id="api-functions">API Functions</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python</label><label for="__tabbed_3_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python</label><label for="__tabbed_3_2">.NET</label><label for="__tabbed_3_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">api_url</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
@@ -1086,6 +1111,96 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">apiURL</span><span class="p">(</span><span class="nx">endpoint</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;https://%s:%s/%s/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ACTOR_API_HOST</span><span class="p">,</span><span class="w"> </span><span class="nx">ACTOR_API_PORT</span><span class="p">,</span><span class="w"> </span><span class="nx">ACTOR_COMMON_NAME</span><span class="p">,</span><span class="w"> </span><span class="nx">endpoint</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">createHTTPClient</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Load client certificate and key</span>
+<span class="w">    </span><span class="nx">cert</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tls</span><span class="p">.</span><span class="nx">LoadX509KeyPair</span><span class="p">(</span><span class="nx">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="p">,</span><span class="w"> </span><span class="nx">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to load client certificate: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Load CA certificate</span>
+<span class="w">    </span><span class="nx">caCert</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="nx">CA_CERTIFICATE_PEM</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to read CA certificate: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create certificate pool with CA</span>
+<span class="w">    </span><span class="nx">caCertPool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x509</span><span class="p">.</span><span class="nx">NewCertPool</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">caCertPool</span><span class="p">.</span><span class="nx">AppendCertsFromPEM</span><span class="p">(</span><span class="nx">caCert</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">tlsConfig</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Certificates</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Certificate</span><span class="p">{</span><span class="nx">cert</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">RootCAs</span><span class="p">:</span><span class="w">      </span><span class="nx">caCertPool</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">MinVersion</span><span class="p">:</span><span class="w">   </span><span class="nx">tls</span><span class="p">.</span><span class="nx">VersionTLS13</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Transport</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Transport</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">TLSClientConfig</span><span class="p">:</span><span class="w"> </span><span class="nx">tlsConfig</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">apiGet</span><span class="p">(</span><span class="nx">endpoint</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Response</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createHTTPClient</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">apiURL</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">apiPost</span><span class="p">(</span><span class="nx">endpoint</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">jsonData</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Response</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createHTTPClient</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">jsonBytes</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Post</span><span class="p">(</span><span class="nx">apiURL</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">NewReader</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">jsonBytes</span><span class="p">)))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">apiDelete</span><span class="p">(</span><span class="nx">endpoint</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Response</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createHTTPClient</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">NewRequest</span><span class="p">(</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">apiURL</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">apiGetDelivery</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Response</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">apiGet</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;deliveries/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">apiDeleteDelivery</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Response</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">apiDelete</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;deliveries/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">apiCreateDelivery</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Response</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">jsonData</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}{</span>
+<span class="w">        </span><span class="s">&quot;selector&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ACTOR_API_DELIVERY_SELECTOR</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">apiPost</span><span class="p">(</span><span class="s">&quot;deliveries&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">jsonData</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <div class="admonition note">
@@ -1093,7 +1208,7 @@
 <p>Implementation of the required delivery endpoints (see <a href="../../openapi/#deliveries">REST API Reference</a>)</p>
 </div>
 <h2 id="amqp-10-client">AMQP 1.0 Client</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Python</label><label for="__tabbed_4_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Python</label><label for="__tabbed_4_2">.NET</label><label for="__tabbed_4_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">amqp_create_ssl_config</span><span class="p">():</span>
@@ -1107,6 +1222,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Sender</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__endpoint</span> <span class="o">=</span> <span class="n">endpoint</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_count</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">on_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Container reactor started&quot;</span><span class="p">)</span>
@@ -1124,7 +1240,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sending</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">MESSAGE_APPLICATION_PROPERTIES_JSON</span><span class="p">))</span>
+        <span class="c1"># Increment message counter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Create dynamic message content with counter and timestamp</span>
+        <span class="n">body_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Hello World! Message #</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">message_count</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">body_binary</span> <span class="o">=</span> <span class="n">body_text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="n">body_binary</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">MESSAGE_APPLICATION_PROPERTIES_JSON</span><span class="p">))</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Sending message </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sender_link</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
@@ -1134,11 +1255,13 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">on_settled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Message </span><span class="si">%s</span><span class="s2"> settled&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">delivery</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sending</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Schedule next message after 1 second</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_reactor_quiesced</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sending</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">send_message</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_timer_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="c1"># Send next message and schedule another</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_message</span><span class="p">()</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">amqp_connect_and_publish</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
     <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
@@ -1163,7 +1286,7 @@
 <span class="w">        </span><span class="n">factory</span><span class="p">.</span><span class="n">SSL</span><span class="p">.</span><span class="n">ClientCertificates</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">clientCert</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// Enable SSL/TLS</span>
-<span class="w">        </span><span class="n">factory</span><span class="p">.</span><span class="n">SSL</span><span class="p">.</span><span class="n">Protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Authentication</span><span class="p">.</span><span class="n">SslProtocols</span><span class="p">.</span><span class="n">Tls12</span><span class="p">;</span>
+<span class="w">        </span><span class="n">factory</span><span class="p">.</span><span class="n">SSL</span><span class="p">.</span><span class="n">Protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Authentication</span><span class="p">.</span><span class="n">SslProtocols</span><span class="p">.</span><span class="n">Tls13</span><span class="p">;</span>
 
 <span class="w">        </span><span class="c1">// Load CA certificate for validation</span>
 <span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">caCertPem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="n">CA_CERTIFICATE_PEM</span><span class="p">);</span>
@@ -1314,8 +1437,8 @@
 <span class="w">            </span><span class="n">LogInfo</span><span class="p">(</span><span class="s">$&quot;Sending message #{messageCount}: {message.Body}{appPropsString}&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">sender</span><span class="p">.</span><span class="n">SendAsync</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
 
-<span class="w">            </span><span class="c1">// Wait 2 seconds before sending the next message</span>
-<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="n">cts</span><span class="p">.</span><span class="n">Token</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// Wait 1 second before sending the next message</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">cts</span><span class="p">.</span><span class="n">Token</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OperationCanceledException</span><span class="p">)</span>
@@ -1329,10 +1452,177 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">amqpCreateTLSConfig</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Load client certificate and key</span>
+<span class="w">    </span><span class="nx">cert</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tls</span><span class="p">.</span><span class="nx">LoadX509KeyPair</span><span class="p">(</span><span class="nx">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="p">,</span><span class="w"> </span><span class="nx">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to load client certificate: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Load CA certificate</span>
+<span class="w">    </span><span class="nx">caCert</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="nx">CA_CERTIFICATE_PEM</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to read CA certificate: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create certificate pool with CA</span>
+<span class="w">    </span><span class="nx">caCertPool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x509</span><span class="p">.</span><span class="nx">NewCertPool</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">caCertPool</span><span class="p">.</span><span class="nx">AppendCertsFromPEM</span><span class="p">(</span><span class="nx">caCert</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">tlsConfig</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Certificates</span><span class="p">:</span><span class="w">       </span><span class="p">[]</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Certificate</span><span class="p">{</span><span class="nx">cert</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">RootCAs</span><span class="p">:</span><span class="w">            </span><span class="nx">caCertPool</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">InsecureSkipVerify</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">MinVersion</span><span class="p">:</span><span class="w">         </span><span class="nx">tls</span><span class="p">.</span><span class="nx">VersionTLS13</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">tlsConfig</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Sender</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">client</span><span class="w">       </span><span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Conn</span>
+<span class="w">    </span><span class="nx">session</span><span class="w">      </span><span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Session</span>
+<span class="w">    </span><span class="nx">sender</span><span class="w">       </span><span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Sender</span>
+<span class="w">    </span><span class="nx">endpoint</span><span class="w">     </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">sending</span><span class="w">      </span><span class="kt">bool</span>
+<span class="w">    </span><span class="nx">messageCount</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Sender</span><span class="p">)</span><span class="w"> </span><span class="nx">connect</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Step 1: Create TLS configuration</span>
+<span class="w">    </span><span class="nx">tlsConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">amqpCreateTLSConfig</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create AMQP URL</span>
+<span class="w">    </span><span class="nx">host</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">endpoint</span><span class="p">[</span><span class="s">&quot;host&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">port</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">endpoint</span><span class="p">[</span><span class="s">&quot;port&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">amqpURL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;amqps://%s:%v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="p">,</span><span class="w"> </span><span class="nx">port</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Connecting to %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">amqpURL</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// Step 2: Connect with TLS</span>
+<span class="w">    </span><span class="nx">opts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">ConnOptions</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">TLSConfig</span><span class="p">:</span><span class="w">     </span><span class="nx">tlsConfig</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">SASLType</span><span class="p">:</span><span class="w">      </span><span class="nx">amqp</span><span class="p">.</span><span class="nx">SASLTypeExternal</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">IdleTimeout</span><span class="p">:</span><span class="w">   </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">MaxFrameSize</span><span class="p">:</span><span class="w">  </span><span class="mi">65536</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">ContainerID</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">HostName</span><span class="p">:</span><span class="w">      </span><span class="nx">host</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Properties</span><span class="p">:</span><span class="w">    </span><span class="kc">nil</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">amqpURL</span><span class="p">,</span><span class="w"> </span><span class="nx">opts</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to connect: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">client</span>
+
+<span class="w">    </span><span class="c1">// Create session</span>
+<span class="w">    </span><span class="nx">session</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">NewSession</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to create session: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">session</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">session</span>
+
+<span class="w">    </span><span class="c1">// Step 3: Create sender link using the target address</span>
+<span class="w">    </span><span class="nx">target</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">endpoint</span><span class="p">[</span><span class="s">&quot;target&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">NewSender</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to create sender: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">sender</span>
+
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Container reactor started&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">sending</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Sender</span><span class="p">)</span><span class="w"> </span><span class="nx">sendMessage</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Parse message properties from JSON</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">MESSAGE_APPLICATION_PROPERTIES_JSON</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">properties</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to parse message properties: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Increment message counter</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">messageCount</span><span class="o">++</span>
+<span class="w">    </span><span class="c1">// Create dynamic message content with counter and timestamp</span>
+<span class="w">    </span><span class="nx">bodyText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;Hello World! Message #%d at %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">messageCount</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Format</span><span class="p">(</span><span class="s">&quot;15:04:05&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">bodyBinary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">bodyText</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// Create message</span>
+<span class="w">    </span><span class="nx">msg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Message</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Data</span><span class="p">:</span><span class="w">                  </span><span class="p">[][]</span><span class="kt">byte</span><span class="p">{</span><span class="nx">bodyBinary</span><span class="p">},</span>
+<span class="w">        </span><span class="nx">ApplicationProperties</span><span class="p">:</span><span class="w"> </span><span class="nx">properties</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// Format message for logging with sorted properties</span>
+<span class="w">    </span><span class="nx">propsMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">propsMap</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">v</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">propsJSON</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">propsMap</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Sending message: body=&#39;%s&#39;, properties=%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">bodyText</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">propsJSON</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1">// Send message</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">Send</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;failed to send message: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Message settled&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Sender</span><span class="p">)</span><span class="w"> </span><span class="nx">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">sending</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">()</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error sending message: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Sender</span><span class="p">)</span><span class="w"> </span><span class="nb">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">sending</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">Close</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">session</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">Close</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">client</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">amqpConnectAndPublish</span><span class="p">(</span><span class="nx">endpoint</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">sender</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Sender</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">endpoint</span><span class="p">:</span><span class="w"> </span><span class="nx">endpoint</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sender</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">sender</span><span class="p">.</span><span class="nb">close</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1">// Run sender</span>
+<span class="w">    </span><span class="nx">sender</span><span class="p">.</span><span class="nx">run</span><span class="p">()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <h2 id="create-a-delivery">Create a delivery</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Python</label><label for="__tabbed_5_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Python</label><label for="__tabbed_5_2">.NET</label><label for="__tabbed_5_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="n">delivery_create_response</span> <span class="o">=</span> <span class="n">api_create_delivery</span><span class="p">()</span>
@@ -1345,10 +1635,24 @@
 <span class="kt">var</span><span class="w"> </span><span class="n">deliveryCreateResponseJson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="o">&lt;</span><span class="n">DeliveryCreateResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="n">deliveryCreateResponseContent</span><span class="p">);</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">deliveryCreateResponse</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">apiCreateDelivery</span><span class="p">()</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error creating delivery: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+
+<span class="nx">deliveryCreateResponseJSON</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseResponseJSON</span><span class="p">(</span><span class="nx">deliveryCreateResponse</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error parsing delivery create response: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <h2 id="poll-the-delivery">Poll the delivery</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Python</label><label for="__tabbed_6_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Python</label><label for="__tabbed_6_2">.NET</label><label for="__tabbed_6_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="n">delivery_id</span> <span class="o">=</span> <span class="n">delivery_create_response_json</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
@@ -1367,10 +1671,28 @@
 <span class="kt">var</span><span class="w"> </span><span class="n">deliveryStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deliveryStatusResponseJson</span><span class="p">.</span><span class="n">Status</span><span class="p">;</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">deliveryID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">deliveryCreateResponseJSON</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+<span class="nx">deliveryStatusResponse</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">apiGetDelivery</span><span class="p">(</span><span class="nx">deliveryID</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error getting delivery status: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+
+<span class="nx">deliveryStatusResponseJSON</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseResponseJSON</span><span class="p">(</span><span class="nx">deliveryStatusResponse</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error parsing delivery status response: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+
+<span class="nx">logJSON</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;Delivery %s status response&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deliveryID</span><span class="p">),</span><span class="w"> </span><span class="nx">deliveryStatusResponseJSON</span><span class="p">)</span>
+<span class="nx">deliveryStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">deliveryStatusResponseJSON</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <h2 id="keep-polling-the-delivery-while-requested">Keep polling the delivery while <code>REQUESTED</code></h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Python</label><label for="__tabbed_7_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Python</label><label for="__tabbed_7_2">.NET</label><label for="__tabbed_7_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="n">delivery_status</span> <span class="o">==</span> <span class="s2">&quot;REQUESTED&quot;</span><span class="p">:</span>
@@ -1395,10 +1717,30 @@
 <span class="n">LogJson</span><span class="p">(</span><span class="s">$&quot;Delivery {deliveryId} status response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">deliveryStatusResponseJson</span><span class="p">);</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="nx">deliveryStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;REQUESTED&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">deliveryStatusResponse</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">apiGetDelivery</span><span class="p">(</span><span class="nx">deliveryID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error polling delivery status: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">deliveryStatusResponseJSON</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">parseResponseJSON</span><span class="p">(</span><span class="nx">deliveryStatusResponse</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error parsing delivery status response: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">deliveryStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">deliveryStatusResponseJSON</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">logJSON</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;Delivery %s status response&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deliveryID</span><span class="p">),</span><span class="w"> </span><span class="nx">deliveryStatusResponseJSON</span><span class="p">)</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <h2 id="use-the-endpoint-information-to-connect">Use the endpoint information to connect</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Python</label><label for="__tabbed_8_2">.NET</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Python</label><label for="__tabbed_8_2">.NET</label><label for="__tabbed_8_3">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">delivery_status</span> <span class="o">==</span> <span class="s2">&quot;CREATED&quot;</span><span class="p">:</span>
@@ -1416,6 +1758,19 @@
 <span class="w">    </span><span class="n">LogInfo</span><span class="p">(</span><span class="s">$&quot;Using endpoint {JsonSerializer.Serialize(endpoint)}&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">AmqpConnectAndPublishAsync</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
 <span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="nx">deliveryStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;CREATED&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// NOTE to keep things simple, this code assumes that this response contains exactly one endpoint!</span>
+<span class="w">    </span><span class="nx">endpoints</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">deliveryStatusResponseJSON</span><span class="p">[</span><span class="s">&quot;endpoints&quot;</span><span class="p">].([]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="w">    </span><span class="nx">endpoint</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">endpoints</span><span class="p">[</span><span class="mi">0</span><span class="p">].(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Using endpoint %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">endpoint</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">amqpConnectAndPublish</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error in AMQP connection: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 </code></pre></div>
 </div>
 </div>
@@ -1438,6 +1793,11 @@
 <tr>
 <td>.NET</td>
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery/dotnet">examples/delivery/dotnet</a></td>
+<td>Complete workflow: CREATE → POLL → CONNECT → USE</td>
+</tr>
+<tr>
+<td>Go</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery/go">examples/delivery/go</a></td>
 <td>Complete workflow: CREATE → POLL → CONNECT → USE</td>
 </tr>
 </tbody>
@@ -1477,7 +1837,7 @@
     </a>
   
   
-    | Document version 0.7.1
+    | Document version 0.8.1
   
 </div>
       
@@ -1493,7 +1853,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.7.1"}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.8.1"}</script>
     
     
       <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>

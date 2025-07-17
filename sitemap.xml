@@ -2,54 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/amqp/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/c-roads/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/connection-management/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/examples/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/openapi/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/security/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/usage-policy/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/usage/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/examples/delivery-direct/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/examples/delivery/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/examples/subscription-direct/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://monotch-support.github.io/local-actor-api-v2/examples/subscription/</loc>
-         <lastmod>2025-07-15</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
 </urlset>
