@@ -586,6 +586,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#complete-workflow-examples-create-poll-connect-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete workflow examples (CREATE → POLL → CONNECT → USE)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-connection-examples-with-known-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Direct connection examples (with known endpoint)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -604,6 +630,7 @@
 
 
 <h1 id="code-examples">Code Examples</h1>
+<h2 id="complete-workflow-examples-create-poll-connect-use">Complete workflow examples (CREATE → POLL → CONNECT → USE)</h2>
 <table>
 <thead>
 <tr>
@@ -615,24 +642,56 @@
 <tbody>
 <tr>
 <td>Subscription (Python)</td>
-<td>Complete subscription workflow (CREATE → POLL → CONNECT → USE)</td>
-<td><a href="https://github.com/monotch-support/examples-local-actor-api-v2-subscription-python">GitHub</a></td>
+<td>Complete subscription workflow</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription/python">examples/subscription/python</a></td>
 </tr>
 <tr>
 <td>Subscription (.NET)</td>
-<td>Complete subscription workflow (CREATE → POLL → CONNECT → USE)</td>
+<td>Complete subscription workflow</td>
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription/dotnet">examples/subscription/dotnet</a></td>
 </tr>
 <tr>
+<td>Subscription (Go)</td>
+<td>Complete subscription workflow</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription/go">examples/subscription/go</a></td>
+</tr>
+<tr>
+<td>Subscription (Java)</td>
+<td>Complete subscription workflow</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription/java">examples/subscription/java</a></td>
+</tr>
+<tr>
 <td>Delivery (Python)</td>
-<td>Complete delivery workflow (CREATE → POLL → CONNECT → USE)</td>
-<td><a href="https://github.com/monotch-support/examples-local-actor-api-v2-delivery-python">GitHub</a></td>
+<td>Complete delivery workflow</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery/python">examples/delivery/python</a></td>
 </tr>
 <tr>
 <td>Delivery (.NET)</td>
-<td>Complete delivery workflow (CREATE → POLL → CONNECT → USE)</td>
+<td>Complete delivery workflow</td>
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery/dotnet">examples/delivery/dotnet</a></td>
 </tr>
+<tr>
+<td>Delivery (Go)</td>
+<td>Complete delivery workflow</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery/go">examples/delivery/go</a></td>
+</tr>
+<tr>
+<td>Delivery (Java)</td>
+<td>Complete delivery workflow</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery/java">examples/delivery/java</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="direct-connection-examples-with-known-endpoint">Direct connection examples (with known endpoint)</h2>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Description</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Direct Subscription (Python)</td>
 <td>Direct AMQP connection with known endpoint</td>
@@ -644,6 +703,16 @@
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription-direct/dotnet">examples/subscription-direct/dotnet</a></td>
 </tr>
 <tr>
+<td>Direct Subscription (Go)</td>
+<td>Direct AMQP connection with known endpoint</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription-direct/go">examples/subscription-direct/go</a></td>
+</tr>
+<tr>
+<td>Direct Subscription (Java)</td>
+<td>Direct AMQP connection with known endpoint</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription-direct/java">examples/subscription-direct/java</a></td>
+</tr>
+<tr>
 <td>Direct Delivery (Python)</td>
 <td>Direct AMQP connection with known endpoint</td>
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery-direct/python">examples/delivery-direct/python</a></td>
@@ -652,6 +721,16 @@
 <td>Direct Delivery (.NET)</td>
 <td>Direct AMQP connection with known endpoint</td>
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery-direct/dotnet">examples/delivery-direct/dotnet</a></td>
+</tr>
+<tr>
+<td>Direct Delivery (Go)</td>
+<td>Direct AMQP connection with known endpoint</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery-direct/go">examples/delivery-direct/go</a></td>
+</tr>
+<tr>
+<td>Direct Delivery (Java)</td>
+<td>Direct AMQP connection with known endpoint</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/delivery-direct/java">examples/delivery-direct/java</a></td>
 </tr>
 </tbody>
 </table>
@@ -690,7 +769,7 @@
     </a>
   
   
-    | Document version 0.8.1
+    | Document version 0.9.0
   
 </div>
       
@@ -706,7 +785,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.8.1"}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.9.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>

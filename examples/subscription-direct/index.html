@@ -825,7 +825,7 @@
 <li>Known AMQP endpoint information (host, port, source address)</li>
 </ul>
 <h3 id="language-specific-requirements">Language-Specific Requirements</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">.NET</label><label for="__tabbed_1_3">Go</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">.NET</label><label for="__tabbed_1_3">Go</label><label for="__tabbed_1_4">Java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ul>
@@ -843,6 +843,12 @@
 <ul>
 <li>Go 1.18 or later</li>
 <li>github.com/Azure/go-amqp package</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Java 11 or later</li>
+<li>Apache Qpid Proton-J library</li>
 </ul>
 </div>
 </div>
@@ -885,7 +891,7 @@
 </tbody>
 </table>
 <h2 id="configuration">Configuration</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">.NET</label><label for="__tabbed_2_3">Go</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python</label><label for="__tabbed_2_2">.NET</label><label for="__tabbed_2_3">Go</label><label for="__tabbed_2_4">Java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="n">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM&quot;</span><span class="p">,</span> <span class="s2">&quot;pem_with_x509_certificate_chain_and_private_key&quot;</span><span class="p">)</span>
@@ -926,6 +932,21 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getEnv</span><span class="p">(</span><span class="s">&quot;ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pem_with_x509_certificate_chain_and_private_key&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CA_CERTIFICATE_PEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getEnv</span><span class="p">(</span><span class="s">&quot;CA_CERTIFICATE_PEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pem_with_x509_certificate&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Pre-known endpoint information</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ENDPOINT_HOST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getEnv</span><span class="p">(</span><span class="s">&quot;ENDPOINT_HOST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amqp_endpoint_host&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ENDPOINT_PORT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getEnv</span><span class="p">(</span><span class="s">&quot;ENDPOINT_PORT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amqp_endpoint_port&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ENDPOINT_SOURCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getEnv</span><span class="p">(</span><span class="s">&quot;ENDPOINT_SOURCE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amqp_endpoint_source_address&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getEnv</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <div class="admonition note">
@@ -933,7 +954,7 @@
 <p>Configuration by environment variables for certificates and pre-known endpoint information</p>
 </div>
 <h2 id="amqp-10-client">AMQP 1.0 Client</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python</label><label for="__tabbed_3_2">.NET</label><label for="__tabbed_3_3">Go</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python</label><label for="__tabbed_3_2">.NET</label><label for="__tabbed_3_3">Go</label><label for="__tabbed_3_4">Java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">amqp_create_ssl_config</span><span class="p">():</span>
@@ -1333,6 +1354,231 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReceiverHandler</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoint</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Receiver</span><span class="w"> </span><span class="n">receiver</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SSLContext</span><span class="w"> </span><span class="n">sslContext</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ReceiverHandler</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoint</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSslContext</span><span class="p">(</span><span class="n">SSLContext</span><span class="w"> </span><span class="n">sslContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sslContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sslContext</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectionInit</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Connection initialized&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span>
+<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">setHostname</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">setContainer</span><span class="p">(</span><span class="s">&quot;java-subscription-direct-example&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectionBound</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Connection bound, configuring transport&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Transport</span><span class="w"> </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getTransport</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sslContext</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Configure SASL EXTERNAL</span>
+<span class="w">            </span><span class="n">Sasl</span><span class="w"> </span><span class="n">sasl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transport</span><span class="p">.</span><span class="na">sasl</span><span class="p">();</span>
+<span class="w">            </span><span class="n">sasl</span><span class="p">.</span><span class="na">setMechanisms</span><span class="p">(</span><span class="s">&quot;EXTERNAL&quot;</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Configure SSL</span>
+<span class="w">            </span><span class="n">SslDomain</span><span class="w"> </span><span class="n">sslDomain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Proton</span><span class="p">.</span><span class="na">sslDomain</span><span class="p">();</span>
+<span class="w">            </span><span class="n">sslDomain</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">SslDomain</span><span class="p">.</span><span class="na">Mode</span><span class="p">.</span><span class="na">CLIENT</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sslDomain</span><span class="p">.</span><span class="na">setPeerAuthentication</span><span class="p">(</span><span class="n">SslDomain</span><span class="p">.</span><span class="na">VerifyMode</span><span class="p">.</span><span class="na">VERIFY_PEER</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sslDomain</span><span class="p">.</span><span class="na">setSslContext</span><span class="p">(</span><span class="n">sslContext</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">transport</span><span class="p">.</span><span class="na">ssl</span><span class="p">(</span><span class="n">sslDomain</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectionRemoteOpen</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Connection opened&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">session</span><span class="p">();</span>
+<span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSessionRemoteOpen</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Session opened&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getSession</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Source</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Source</span><span class="p">();</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">sourceAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;source&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">source</span><span class="p">.</span><span class="na">setAddress</span><span class="p">(</span><span class="n">sourceAddress</span><span class="p">);</span>
+<span class="w">        </span><span class="n">receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">receiver</span><span class="p">(</span><span class="n">sourceAddress</span><span class="p">);</span>
+<span class="w">        </span><span class="n">receiver</span><span class="p">.</span><span class="na">setSource</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Target</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Target</span><span class="p">();</span>
+<span class="w">        </span><span class="n">receiver</span><span class="p">.</span><span class="na">setTarget</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+<span class="w">        </span><span class="n">receiver</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLinkRemoteClose</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Link</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getLink</span><span class="p">();</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">severe</span><span class="p">(</span><span class="s">&quot;Link remote close - State: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="p">.</span><span class="na">getRemoteState</span><span class="p">());</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="p">.</span><span class="na">getRemoteCondition</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">severe</span><span class="p">(</span><span class="s">&quot;Condition: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="p">.</span><span class="na">getRemoteCondition</span><span class="p">().</span><span class="na">getCondition</span><span class="p">());</span>
+<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">severe</span><span class="p">(</span><span class="s">&quot;Description: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="p">.</span><span class="na">getRemoteCondition</span><span class="p">().</span><span class="na">getDescription</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLinkRemoteOpen</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Receiver link opened, ready to receive messages&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">receiver</span><span class="p">.</span><span class="na">flow</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// Grant credit to receive messages</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDelivery</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Delivery</span><span class="w"> </span><span class="n">delivery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getDelivery</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">delivery</span><span class="p">.</span><span class="na">isReadable</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">delivery</span><span class="p">.</span><span class="na">isPartial</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Read message data</span>
+<span class="w">                </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">messageData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">delivery</span><span class="p">.</span><span class="na">available</span><span class="p">()</span><span class="o">]</span><span class="p">;</span>
+<span class="w">                </span><span class="n">receiver</span><span class="p">.</span><span class="na">recv</span><span class="p">(</span><span class="n">messageData</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">messageData</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+
+<span class="w">                </span><span class="c1">// Decode message</span>
+<span class="w">                </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Message</span><span class="p">.</span><span class="na">Factory</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+<span class="w">                </span><span class="n">message</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">messageData</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">messageData</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+
+<span class="w">                </span><span class="c1">// Extract body</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">bodyText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getBody</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">Data</span><span class="w"> </span><span class="n">bodyData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Data</span><span class="p">)</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getBody</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bodyData</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Binary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">Binary</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Binary</span><span class="p">)</span><span class="w"> </span><span class="n">bodyData</span><span class="p">.</span><span class="na">getValue</span><span class="p">();</span>
+<span class="w">                        </span><span class="n">bodyText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">binary</span><span class="p">.</span><span class="na">getArray</span><span class="p">(),</span><span class="w"> </span><span class="n">binary</span><span class="p">.</span><span class="na">getArrayOffset</span><span class="p">(),</span><span class="w"> </span><span class="n">binary</span><span class="p">.</span><span class="na">getLength</span><span class="p">(),</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span>
+<span class="w">                    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">logger</span><span class="p">.</span><span class="na">warning</span><span class="p">(</span><span class="s">&quot;Unexpected body type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bodyData</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">                        </span><span class="n">bodyText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bodyData</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span><span class="w"> </span><span class="c1">// Fallback to string representation</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">logger</span><span class="p">.</span><span class="na">warning</span><span class="p">(</span><span class="s">&quot;Unexpected message body type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">                    </span><span class="n">bodyText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span><span class="w"> </span><span class="c1">// Fallback to string representation</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="c1">// Extract and format application properties</span>
+<span class="w">                </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appProps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getApplicationProperties</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getApplicationProperties</span><span class="p">().</span><span class="na">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">appProps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getApplicationProperties</span><span class="p">().</span><span class="na">getValue</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="c1">// Format properties in sorted order for consistent logging</span>
+<span class="w">                </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">mapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">();</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">sortedProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TreeMap</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">appProps</span><span class="p">));</span>
+
+<span class="w">                </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;Message received: body=&#39;%s&#39;, properties=%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bodyText</span><span class="p">,</span><span class="w"> </span><span class="n">sortedProperties</span><span class="p">));</span>
+
+<span class="w">                </span><span class="c1">// Settle the delivery</span>
+<span class="w">                </span><span class="n">delivery</span><span class="p">.</span><span class="na">settle</span><span class="p">();</span>
+
+<span class="w">                </span><span class="c1">// Grant more credit for next message</span>
+<span class="w">                </span><span class="n">receiver</span><span class="p">.</span><span class="na">flow</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">logger</span><span class="p">.</span><span class="na">log</span><span class="p">(</span><span class="n">Level</span><span class="p">.</span><span class="na">WARNING</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Error processing message&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">                </span><span class="n">delivery</span><span class="p">.</span><span class="na">settle</span><span class="p">();</span>
+<span class="w">                </span><span class="n">receiver</span><span class="p">.</span><span class="na">flow</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransportError</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">log</span><span class="p">(</span><span class="n">Level</span><span class="p">.</span><span class="na">SEVERE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Transport error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getTransport</span><span class="p">().</span><span class="na">getCondition</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">SSLContext</span><span class="w"> </span><span class="nf">createSSLContext</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Add BouncyCastle provider</span>
+<span class="w">    </span><span class="n">Security</span><span class="p">.</span><span class="na">addProvider</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BouncyCastleProvider</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Create SSL context</span>
+<span class="w">    </span><span class="n">SSLContext</span><span class="w"> </span><span class="n">sslContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SSLContext</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;TLSv1.3&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Load client certificate and key</span>
+<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">keyStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;PKCS12&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">keyStore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Parse certificates and key using BouncyCastle</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">cert</span><span class="p">.</span><span class="na">Certificate</span><span class="o">&gt;</span><span class="w"> </span><span class="n">certChain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">PrivateKey</span><span class="w"> </span><span class="n">privateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PEMParser</span><span class="w"> </span><span class="n">pemParser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PEMParser</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">ACTOR_CERTIFICATE_CHAIN_AND_KEY_PEM</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">object</span><span class="p">;</span>
+<span class="w">        </span><span class="n">JcaPEMKeyConverter</span><span class="w"> </span><span class="n">keyConverter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JcaPEMKeyConverter</span><span class="p">().</span><span class="na">setProvider</span><span class="p">(</span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JcaX509CertificateConverter</span><span class="w"> </span><span class="n">certConverter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JcaX509CertificateConverter</span><span class="p">().</span><span class="na">setProvider</span><span class="p">(</span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pemParser</span><span class="p">.</span><span class="na">readObject</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">X509CertificateHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">certChain</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">certConverter</span><span class="p">.</span><span class="na">getCertificate</span><span class="p">((</span><span class="n">X509CertificateHolder</span><span class="p">)</span><span class="w"> </span><span class="n">object</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">PEMKeyPair</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">privateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyConverter</span><span class="p">.</span><span class="na">getPrivateKey</span><span class="p">(((</span><span class="n">PEMKeyPair</span><span class="p">)</span><span class="w"> </span><span class="n">object</span><span class="p">).</span><span class="na">getPrivateKeyInfo</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Add certificate chain and key to keystore</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">privateKey</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">certChain</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">keyStore</span><span class="p">.</span><span class="na">setKeyEntry</span><span class="p">(</span><span class="s">&quot;client&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">certChain</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">cert</span><span class="p">.</span><span class="na">Certificate</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Failed to load client certificate and key&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Initialize key manager</span>
+<span class="w">    </span><span class="n">KeyManagerFactory</span><span class="w"> </span><span class="n">kmf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyManagerFactory</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">KeyManagerFactory</span><span class="p">.</span><span class="na">getDefaultAlgorithm</span><span class="p">());</span>
+<span class="w">    </span><span class="n">kmf</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">keyStore</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Load CA certificate</span>
+<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">trustStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getDefaultType</span><span class="p">());</span>
+<span class="w">    </span><span class="n">trustStore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">CertificateFactory</span><span class="w"> </span><span class="n">cf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CertificateFactory</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;X.509&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileInputStream</span><span class="w"> </span><span class="n">fis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">CA_CERTIFICATE_PEM</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">java</span><span class="p">.</span><span class="na">security</span><span class="p">.</span><span class="na">cert</span><span class="p">.</span><span class="na">Certificate</span><span class="w"> </span><span class="n">caCert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cf</span><span class="p">.</span><span class="na">generateCertificate</span><span class="p">(</span><span class="n">fis</span><span class="p">);</span>
+<span class="w">        </span><span class="n">trustStore</span><span class="p">.</span><span class="na">setCertificateEntry</span><span class="p">(</span><span class="s">&quot;ca&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">caCert</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Initialize trust manager</span>
+<span class="w">    </span><span class="n">TrustManagerFactory</span><span class="w"> </span><span class="n">tmf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrustManagerFactory</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">TrustManagerFactory</span><span class="p">.</span><span class="na">getDefaultAlgorithm</span><span class="p">());</span>
+<span class="w">    </span><span class="n">tmf</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">trustStore</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Initialize SSL context</span>
+<span class="w">    </span><span class="n">sslContext</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">kmf</span><span class="p">.</span><span class="na">getKeyManagers</span><span class="p">(),</span><span class="w"> </span><span class="n">tmf</span><span class="p">.</span><span class="na">getTrustManagers</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sslContext</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">amqpConnectAndListen</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoint</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Configure SSL</span>
+<span class="w">    </span><span class="n">SSLContext</span><span class="w"> </span><span class="n">sslContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createSSLContext</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Create handler</span>
+<span class="w">    </span><span class="n">ReceiverHandler</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReceiverHandler</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="na">setSslContext</span><span class="p">(</span><span class="n">sslContext</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Create reactor</span>
+<span class="w">    </span><span class="n">Reactor</span><span class="w"> </span><span class="n">reactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Proton</span><span class="p">.</span><span class="na">reactor</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Connect to host with SSL and SASL configuration</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;port&quot;</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Use reactor&#39;s connection method with proper SSL/SASL setup</span>
+<span class="w">    </span><span class="n">reactor</span><span class="p">.</span><span class="na">connectionToHost</span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">handler</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Run reactor</span>
+<span class="w">    </span><span class="n">reactor</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <div class="admonition note">
@@ -1342,10 +1588,11 @@
 <li><strong>Python</strong>: python-qpid-proton library</li>
 <li><strong>.NET</strong>: AMQPNetLite library  </li>
 <li><strong>Go</strong>: Azure/go-amqp library</li>
+<li><strong>Java</strong>: Apache Qpid Proton-J library</li>
 </ul>
 </div>
 <h2 id="direct-connection-and-subscription">Direct connection and subscription</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Python</label><label for="__tabbed_4_2">.NET</label><label for="__tabbed_4_3">Go</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:4"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Python</label><label for="__tabbed_4_2">.NET</label><label for="__tabbed_4_3">Go</label><label for="__tabbed_4_4">Java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">direct_subscribe</span><span class="p">():</span>
@@ -1404,6 +1651,24 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">directSubscribe</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Create endpoint from environment variables</span>
+<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">endpoint</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ENDPOINT_HOST</span><span class="p">);</span>
+<span class="w">        </span><span class="n">endpoint</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;port&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ENDPOINT_PORT</span><span class="p">);</span>
+<span class="w">        </span><span class="n">endpoint</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;source&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ENDPOINT_SOURCE</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Using pre-known endpoint &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">endpoint</span><span class="p">);</span>
+<span class="w">        </span><span class="n">amqpConnectAndListen</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">log</span><span class="p">(</span><span class="n">Level</span><span class="p">.</span><span class="na">SEVERE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;An exception occurred while running direct_subscribe&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
 </div>
 </div>
 <div class="admonition note">
@@ -1433,6 +1698,11 @@
 <tr>
 <td>Go</td>
 <td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription-direct/go">examples/subscription-direct/go</a></td>
+<td>Direct AMQP connection with known endpoint</td>
+</tr>
+<tr>
+<td>Java</td>
+<td><a href="https://github.com/monotch-support/local-actor-api-v2/tree/main/examples/subscription-direct/java">examples/subscription-direct/java</a></td>
 <td>Direct AMQP connection with known endpoint</td>
 </tr>
 </tbody>
@@ -1472,7 +1742,7 @@
     </a>
   
   
-    | Document version 0.8.1
+    | Document version 0.9.0
   
 </div>
       
@@ -1488,7 +1758,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.8.1"}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.9.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
