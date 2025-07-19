@@ -1,0 +1,45 @@
+site_name: Local Actor API v2
+site_url: https://monotch-support.github.io/local-actor-api-v2
+repo_url: https://github.com/monotch-support/local-actor-api-v2
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - navigation.instant
+    - navigation.sections
+    - content.code.copy
+    # - toc.integrate
+nav:
+  - Introduction: index.md
+  - Security: security.md
+    # - Usage: usage.md  
+  - Connection management: connection-management.md
+  - Usage policy: usage-policy.md
+  - Examples:
+      - Delivery: examples/delivery.md
+      - Subscription: examples/subscription.md
+      - Direct Delivery: examples/delivery-direct.md
+      - Direct Subscription: examples/subscription-direct.md
+  - References:
+      - REST API: openapi.md
+      - AMQP 1.0: amqp.md
+      - C-Roads: c-roads.md
+extra_css:
+  - stylesheets/width.css
+  - stylesheets/neoteroi-css-v1.1.2.css
+plugins:
+  - search
+  - include-markdown
+  - macros
+  - neoteroi.mkdocsoad:
+      use_pymdownx: true
+markdown_extensions:
+  - admonition
+  - plantuml_markdown
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+extra:
+  version: 0.9.1
